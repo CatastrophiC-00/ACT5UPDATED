@@ -8,8 +8,16 @@ class sectionsController extends Controller
 {
     public function index()
     {
-		$students = DB::table('students')->get();
 		$sections = DB::table('sections')->get();
-    	return view('sections.index', compact('sections', 'students'));
+    	return view('sections.index')->with('sections', $sections);
+    }
+    public function filter()
+    {
+    	$students = DB::table('students')
+    	->leftjoin('payments', 'students.id', '=', 'payments.student_id')
+    	->where('section_id', request()->section_id)
+    	->get();
+    	return $students;
+
     }
 }

@@ -15,4 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/sections', 'sectionsController@index');
+Route::get('/students', 'sectionsController@filter');
 
